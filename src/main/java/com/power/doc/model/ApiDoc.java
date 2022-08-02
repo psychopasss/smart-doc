@@ -66,6 +66,8 @@ public class ApiDoc implements Comparable<ApiDoc> {
 
     private String author;
 
+    private String date;
+
     public String getAuthor() {
         return author;
     }
@@ -149,5 +151,13 @@ public class ApiDoc implements Comparable<ApiDoc> {
                 .append(desc).append('\"');
         sb.append('}');
         return sb.toString();
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

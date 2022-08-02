@@ -16,6 +16,10 @@ for(doc in list){
 **${templateMap.author}:** ${doc.author}
 <%}%>
 
+<%if(isNotEmpty(doc.date)){%>
+**${templateMap.date}:** ${doc.date}
+<%}%>
+
 **${templateMap.contentType}:** `${doc.contentType}`
 
 **${templateMap.description}:** ${doc.detail}

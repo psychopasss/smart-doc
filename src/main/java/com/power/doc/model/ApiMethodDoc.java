@@ -96,6 +96,11 @@ public class ApiMethodDoc implements Serializable {
     private String author;
 
     /**
+     * http request date
+     */
+    private String date;
+
+    /**
      * only used for generate markdown and adoc
      * http readers
      */
@@ -360,6 +365,14 @@ public class ApiMethodDoc implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getPath() {

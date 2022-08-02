@@ -234,10 +234,15 @@ public class SpringBootDocBuildTemplate implements IDocBuildTemplate<ApiDoc> {
             Map<String, String> authorMap = DocUtil.getParamsComments(method, DocTags.AUTHOR, cls.getName());
             String authorValue = String.join(", ", new ArrayList<>(authorMap.keySet()));
             if (apiConfig.isShowAuthor() && StringUtil.isNotEmpty(authorValue)) {
-                apiMethodDoc.setAuthor(JsonUtil.toPrettyFormat(authorValue));
+                apiMethodDoc.setAuthor(JsonUtil.toPrettyFormat(authorValue).replace("\"",""));
             }
             if (apiConfig.isShowAuthor() && StringUtil.isEmpty(authorValue)) {
                 apiMethodDoc.setAuthor(classAuthor);
+            }
+            String date = DocUtil.getNormalTagComments(method, DocTags.SINCE, cls.getName());
+            if (StringUtil.isNotEmpty(date)) {
+                date = date.replace(" ","-");
+                apiMethodDoc.setDate(date);
             }
             apiMethodDoc.setDetail(apiNoteValue);
             //handle headers

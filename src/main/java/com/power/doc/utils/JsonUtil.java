@@ -22,10 +22,21 @@
  */
 package com.power.doc.utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.power.common.util.StringUtil;
+import com.power.doc.constants.DocTags;
+import com.thoughtworks.qdox.JavaProjectBuilder;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaMethod;
 
 /**
  * @author yu 2021/6/26.
@@ -36,7 +47,11 @@ public class JsonUtil {
      * Convert a JSON string to pretty print
      *
      * @param jsonString json string
+     *
      * @return Format json string
+     *
+     * @author asdfs
+     * @since 2022-05-27 17:46:49
      */
     public static String toPrettyFormat(String jsonString) {
         try {
@@ -49,10 +64,35 @@ public class JsonUtil {
         }
     }
 
+    public static void main(String[] args) throws IOException {
+        String asd = "sadfs";
+        System.out.println(toPrettyFormat(asd));
+        JavaProjectBuilder javaProjectBuilder = new JavaProjectBuilder();
+        // 添加 java 源文件
+        javaProjectBuilder.addSource(
+                new File("/Users/yanzhenyu/Local/gitee/smart-doc/src/main/java/com/power/doc/utils/JsonUtil.java"));
+
+        // 获得解析后的类
+        Collection<JavaClass> classes = javaProjectBuilder.getClasses();
+        for (JavaClass javaClass : classes) {
+            for (JavaMethod method : javaClass.getMethods()) {
+                String normalTagComments = DocUtil.getNormalTagComments(method, DocTags.SINCE, javaClass.getName());
+                System.out.println(normalTagComments);
+                // Map<String, String> paramsComments = (Map<String, String>)normalTagComments;
+                // String authorValue = String.join(", ", new ArrayList<>(paramsComments.keySet()));
+                // if (StringUtil.isNotEmpty(authorValue)) {
+                //     String x = JsonUtil.toPrettyFormat(authorValue);
+                //     System.out.println(x);
+                // }
+            }
+        }
+    }
+
     /**
      * Convert a JSON to String and pretty print
      *
      * @param src Json
+     *
      * @return Format json string
      */
     public static String toPrettyJson(Object src) {

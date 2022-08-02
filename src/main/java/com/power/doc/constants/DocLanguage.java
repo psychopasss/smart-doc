@@ -48,6 +48,7 @@ public enum DocLanguage {
         String url = "URL";
         String type = "Type";
         String author = "Author";
+        String date = "Date";
         String contentType = "Content-Type";
         String description = "Description";
         String requestHeaders = "Request-headers";
@@ -74,6 +75,7 @@ public enum DocLanguage {
             url = "接口地址";
             type = "请求方式";
             author = "作者";
+            date = "创建时间";
             contentType = "请求格式";
             description = "接口说明";
             requestHeaders = "请求头";
@@ -100,6 +102,7 @@ public enum DocLanguage {
         languageMap.put("url", url);
         languageMap.put("type", type);
         languageMap.put("author", author);
+        languageMap.put("date", date);
         languageMap.put("contentType", contentType);
         languageMap.put("description", description);
         languageMap.put("requestHeaders", requestHeaders);
