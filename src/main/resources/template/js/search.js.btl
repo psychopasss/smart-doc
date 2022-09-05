@@ -62,6 +62,7 @@ function keyDownSearch(e) {
                 }
             }
         }
+        searchArr.push(api[api.length-1]);
         let html;
         if (searchValue == '') {
             const liClass = "";
