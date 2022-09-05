@@ -112,7 +112,6 @@ public class SpringBootDocBuildTemplate implements IDocBuildTemplate<ApiDoc> {
         List<ApiDoc> apiDocList = new ArrayList<>();
         int order = 500;
         Collection<JavaClass> classes = projectBuilder.getJavaProjectBuilder().getClasses();
-        boolean setCustomOrder = false;
         for (JavaClass cls : classes) {
             if (StringUtil.isNotEmpty(apiConfig.getPackageFilters())) {
                 if (!DocUtil.isMatch(apiConfig.getPackageFilters(), cls.getCanonicalName())) {
@@ -127,7 +126,6 @@ public class SpringBootDocBuildTemplate implements IDocBuildTemplate<ApiDoc> {
             Integer tempOrder = null;
             if (ValidateUtil.isNonnegativeInteger(strOrder)) {
                 tempOrder = Integer.parseInt(strOrder);
-                setCustomOrder = true;
             } else {
                 order++;
             }
@@ -138,7 +136,7 @@ public class SpringBootDocBuildTemplate implements IDocBuildTemplate<ApiDoc> {
         // sort
         if (apiConfig.isSortByTitle()) {
             Collections.sort(apiDocList);
-        } else if (setCustomOrder) {
+        } else {
             // while set custom oder
             return apiDocList.stream()
                     .sorted(Comparator.comparing(ApiDoc::getOrder))
