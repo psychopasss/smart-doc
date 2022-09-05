@@ -99,7 +99,11 @@ function buildAccordion(apiData, liClass, display, searchValue) {
     let doc;
     if (apiData.length > 0) {
          for (let j = 0; j < apiData.length; j++) {
-            html += '<li class="'+liClass+'">';
+            if(apiData[j].alias==tempAlias){
+                html += '<li class="'+liClass+'" style="background: antiquewhite">';
+            }else{
+                html += '<li class="'+liClass+'">';
+            }
             html += '<a class="dd" href="' + apiData[j].alias + '.html'+"?searchValue="+searchValue+'#header">' + apiData[j].order + '.&nbsp;' + apiData[j].desc + '</a>';
             html += '<ul class="sectlevel2" style="'+display+'">';
             doc = apiData[j].list;

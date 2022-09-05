@@ -103,7 +103,7 @@ public class HtmlApiDocBuilder {
             builderTemplate.buildErrorCodeDoc(config, javaProjectBuilder, apiDocList, SINGLE_ERROR_HTML_TPL,
                     ERROR_CODE_HTML, indexAlias);
             builderTemplate.buildDirectoryDataDoc(config, javaProjectBuilder, apiDocList,
-                    SINGLE_DICT_HTML_TPL, DICT_HTML, indexAlias);
+                    SINGLE_DICT_HTML_TPL, DICT_HTML);
             builderTemplate.buildSearchJs(config, javaProjectBuilder, apiDocList, SEARCH_JS_TPL);
         }
 

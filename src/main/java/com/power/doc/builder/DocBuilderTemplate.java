@@ -178,6 +178,7 @@ public class DocBuilderTemplate extends BaseDocBuilderTemplate {
             tpl.binding(TemplateVariable.DICT_ORDER.getVariable(), apiDocList.size() + 2);
         }
         if (Objects.nonNull(apiDoc)) {
+            tpl.binding(TemplateVariable.INDEX_ALIAS.getVariable(), apiDoc.getAlias());
             tpl.binding(TemplateVariable.DESC.getVariable(), apiDoc.getDesc());
             tpl.binding(TemplateVariable.ORDER.getVariable(), apiDoc.order);
             tpl.binding(TemplateVariable.LIST.getVariable(), apiDoc.getList());//类名
@@ -233,6 +234,7 @@ public class DocBuilderTemplate extends BaseDocBuilderTemplate {
         }
         apiDoc1.setList(methodDocs);
         apiDocs.add(apiDoc1);
+        tpl.binding(TemplateVariable.INDEX_ALIAS.getVariable(), apiDoc1.getAlias());
         tpl.binding(TemplateVariable.API_DOC_LIST.getVariable(), apiDocs);
         tpl.binding(TemplateVariable.TEMPLATE_MAP.getVariable(), DocLanguage.getLanguageMap(config.getLanguage()));
         FileUtil.nioWriteFile(tpl.render(), config.getOutPath() + FILE_SEPARATOR + SEARCH_JS_OUT);
@@ -304,10 +306,9 @@ public class DocBuilderTemplate extends BaseDocBuilderTemplate {
      * @param apiDocList         list  data of Api doc
      * @param template           template
      * @param outPutFileName     output file
-     * @param indexAlias         index alias
      */
     public void buildDirectoryDataDoc(ApiConfig config, JavaProjectBuilder javaProjectBuilder, List<ApiDoc> apiDocList,
-                                      String template, String outPutFileName, String indexAlias) {
+                                      String template, String outPutFileName) {
         List<ApiDocDict> directoryList = DocUtil.buildDictionary(config, javaProjectBuilder);
         Template mapper = BeetlTemplateUtil.getByName(template);
         String strTime = DateTimeUtil.long2Str(now, DateTimeUtil.DATE_FORMAT_SECOND);
@@ -331,7 +332,7 @@ public class DocBuilderTemplate extends BaseDocBuilderTemplate {
         mapper.binding(TemplateVariable.CREATE_TIME.getVariable(), strTime);
         mapper.binding(TemplateVariable.VERSION.getVariable(), now);
         mapper.binding(TemplateVariable.API_DOC_LIST.getVariable(), apiDocList);
-        mapper.binding(TemplateVariable.INDEX_ALIAS.getVariable(), indexAlias);
+        mapper.binding(TemplateVariable.INDEX_ALIAS.getVariable(), "dict");
         mapper.binding(TemplateVariable.BACKGROUND.getVariable(), HighlightStyle.getBackgroundColor(style));
         mapper.binding(TemplateVariable.ERROR_CODE_LIST.getVariable(), errorCodeList);
         setDirectoryLanguageVariable(config, mapper);

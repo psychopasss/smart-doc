@@ -97,6 +97,11 @@ function buildAccordion(apiData, liClass, display, searchValue) {
     let doc;
     if (apiData.length > 0) {
          for (let j = 0; j < apiData.length; j++) {
+            if(apiData[j].alias==tempAlias){
+                html += '<li class="'+liClass+'" style="background: antiquewhite">';
+            }else{
+                html += '<li class="'+liClass+'">';
+            }
             html += '<li class="'+liClass+'">';
             html += '<a class="dd" href="#_' + apiData[j].link + '">' + apiData[j].order + '.&nbsp;' + apiData[j].desc + '</a>';
             html += '<ul class="sectlevel2" style="'+display+'">';
