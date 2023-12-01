@@ -45,7 +45,7 @@ function keyDownSearch(e) {
                     const methodData = methodList[j];
                     const methodDesc = methodData.desc;
                     const methodUrl = methodData.url;
-                    if (methodDesc.indexOf(searchValue) > -1 || methodUrl.indexOf(searchValue) > -1) {
+                    if (methodDesc.indexOf(searchValue) > -1 || methodUrl.toLowerCase().indexOf(searchValue.toLowerCase()) > -1) {
                         methodListTemp.push(methodData);
                     }
                 }
